@@ -32,6 +32,8 @@ arch-chroot /mnt /bin/bash -c "echo \"127.0.0.1        localhost\"  > /etc/hosts
 arch-chroot /mnt /bin/bash -c "echo \"::1              localhost\" >> /etc/hosts"
 arch-chroot /mnt /bin/bash -c "echo \"127.0.1.1        $SIMPLE_HOSTNAME\" >> /etc/hosts"
 
+arch-chroot /mnt /bin/bash -c "echo \"Server = https://mirror.orbit-os.com/archlinux/$repo/os/$arch\" > /etc/pacman.d/mirrorlist"
+
 arch-chroot /mnt /bin/bash -c "pacman --noconfirm -Sy grub"
 arch-chroot /mnt /bin/bash -c "grub-install $SIMPLE_DISK"
 arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
