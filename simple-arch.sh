@@ -38,6 +38,8 @@ arch-chroot /mnt /bin/bash -c "pacman --noconfirm -Sy grub"
 arch-chroot /mnt /bin/bash -c "grub-install $SIMPLE_DISK"
 arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
 
+arch-chroot /mnt /bin/bash -c "pacman --noconfirm -Sy openssh"
+arch-chroot /mnt /bin/bash -c "systemctl enable sshd"
 arch-chroot /mnt /bin/bash -c "systemctl enable dhcpcd"
 
 echo "Now chaning root password"
