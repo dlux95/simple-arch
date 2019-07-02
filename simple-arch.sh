@@ -18,7 +18,7 @@ mkfs.ext4 "$SIMPLE_DISK"1
 
 mount "$SIMPLE_DISK"1 /mnt
 
-echo "Server = https://mirror.orbit-os.com/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
+echo "Server = https://mirror.orbit-os.com/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
 pacstrap /mnt $SIMPLE_TARGET
 genfstab -U /mnt >> /mnt/etc/fstab
 
