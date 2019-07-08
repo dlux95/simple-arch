@@ -18,7 +18,7 @@ mkfs.ext4 "$SIMPLE_DISK"1
 
 mount "$SIMPLE_DISK"1 /mnt
 
-echo "Server = https://mirror.orbit-os.com/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+#echo "Server = https://mirror.orbit-os.com/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 pacstrap /mnt $SIMPLE_TARGET
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -32,14 +32,14 @@ arch-chroot /mnt /bin/bash -c "echo \"127.0.0.1        localhost\"  > /etc/hosts
 arch-chroot /mnt /bin/bash -c "echo \"::1              localhost\" >> /etc/hosts"
 arch-chroot /mnt /bin/bash -c "echo \"127.0.1.1        $SIMPLE_HOSTNAME\" >> /etc/hosts"
 
-echo "Server = https://mirror.orbit-os.com/archlinux/\$repo/os/\$arch" > /mnt/etc/pacman.d/mirrorlist
+#echo "Server = https://mirror.orbit-os.com/archlinux/\$repo/os/\$arch" > /mnt/etc/pacman.d/mirrorlist
 
 arch-chroot /mnt /bin/bash -c "pacman --noconfirm -Sy grub"
 arch-chroot /mnt /bin/bash -c "grub-install $SIMPLE_DISK"
 arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
 
 arch-chroot /mnt /bin/bash -c "pacman --noconfirm -Sy openssh"
-arch-chroot /mnt /bin/bash -c "PermitRootLogin yes" >> /etc/ssh/sshd_config"
+arch-chroot /mnt /bin/bash -c "echo \"PermitRootLogin yes\" >> /etc/ssh/sshd_config"
 arch-chroot /mnt /bin/bash -c "systemctl enable sshd"
 arch-chroot /mnt /bin/bash -c "systemctl enable dhcpcd"
 
